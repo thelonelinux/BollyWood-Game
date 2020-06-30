@@ -9,31 +9,31 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
         System.out.println();
-        System.out.println("###############################----WELCOME TO BOLLYWOOD GAME----##################################");
-
-        System.out.println("Please Enter the movie name all in Capital Letter or numbers only , No special characters allowed.");
+        System.out.println("########################################################################     -------     WELCOME   TO   BOLLYWOOD   GAME     -------     #####################################################################");
         System.out.println();
-        System.out.print("So Enter the name of the movie here: ");
+        System.out.println();
+        System.out.print("ENTER THE NAME OF YOUR MOVIE HERE (USE ONLY CAPITAL LETTER OR NUMERICAL DIGITS ONLY, NO SPECIAL CHARACTERS ALLOWED->>");
 
         Scanner sc=new Scanner(System.in);
         String str = sc.nextLine();
         String[] nameOfMovie = str.split("[\\s | . | , | ! | ? | ;  | : | @ |  * |']+");
 
         System.out.println();
-        System.out.print("So the name of your movie is: ");
+        System.out.print("YOUR MOVIE NAME IS-------> ");
         for (int i=0;i<nameOfMovie.length;i++){
             System.out.print(nameOfMovie[i]+" ");
         }
-        System.out.println();
+        System.out.print(" <-------");
 
-        System.out.println("If this movie is correct then we can proceed further");
-        System.out.println("Enter 'Y' or 'y' to proceed further to start with the game else 'N' or 'n' to resubmit movie name correctly");
+        System.out.println(" ####################-----> CHECK THE NAME IF ALL SPELLINGS ARE CORRECT AND AUTHENTICATE <---------");
+        System.out.print("ENTER 'Y' OR 'y' TO PROCEED FURTHER TO START WITH THE GAME ELSE 'N' OR 'n' TO RESUBMIT MOVIE NAME CORRECTLY-->>");
         char yourAns=sc.next().charAt(0);
         switch (yourAns){
 
             case 'Y' :
             case 'y' :
-                System.out.println("So lets start the game");
+                System.out.println();
+                System.out.println("LETS BEGIN WITH THE GAME...........");
                         break;
 
             case 'N' :
@@ -47,15 +47,11 @@ public class Main {
         }
 
         if (yourAns=='Y' || yourAns=='y'){
+            System.out.println("######################################################################   -----------    THE   GAME   HAS   STARTED   ----------   #########################################################################");
             System.out.println();
             System.out.println();
-            System.out.println("###############################--The game has started---############################");
-            System.out.println();
-            System.out.println();
-            System.out.println("Fill in the blank below to find the name of the movie");
-            System.out.println("The movie is as follows");
-            System.out.println();
-            System.out.println();
+            System.out.print("Fill in the blank below to find the name of the movie :   ");
+            System.out.print("THE MOVIE NAME IS AS FOLLOWS:-       ");
             for (int i=0;i<nameOfMovie.length;i++){
                 for (int j=0;j<nameOfMovie[i].length();j++){
                     System.out.print("_ ");
@@ -66,9 +62,7 @@ public class Main {
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println("So now you start guessing the movie by using any capital alphabet or numbers");
-        System.out.println();
-
+        System.out.println("GUESS YOUR CHARACTER HERE (EITHER NUMBER OR CAPITAL LETTER ALPHABET)");
 
         Set<Character> movieSet=new HashSet<>();
         for (int i=0;i<nameOfMovie.length;i++){
@@ -81,46 +75,56 @@ public class Main {
         Set<Character> guessedCorrectly=new HashSet<>();
         Set<Character> incorrectGuessed=new HashSet<>();
         while (!guessedCorrectly.equals(movieSet)){
-            System.out.print("Guess the alphabet or number here : ");
+            System.out.print("INCORRECT GUESSED LIST ----->"+incorrectGuessed+"            CORRECT GUESSED LIST ------>"+guessedCorrectly);
+            System.out.print("          TYPE YOUR GUESSED CHARACTER HERE--->>");
             char guess=sc.next().charAt(0);
             sc.nextLine();
+            System.out.println();
 
             //TestCases will be if the guess is correct, if the guess is incorrect, if the guess is already guessed, and if the guess is invalid
 
             //If the guess is invalid
-            if ((guess<=65 || guess>=90) && (guess<=48 || guess>=57)){
-                System.out.println("Invalid Guess : Enter only capital letter alphabets or numbers");
+            if ((guess<65 || guess>90) && (guess<48 || guess>57)){
+                System.out.println("INVALID GUESS : ENTER ONLY CAPITAL LETTER ALPHABETS OR NUMBERS");
             }
             //If the guess is already guessed
             else if (guessedCorrectly.contains(guess) || incorrectGuessed.contains(guess)){
-                System.out.println("This alphabet is already guessed : Guess again");
+                System.out.println("THIS ALPHABET IS ALREADY BEING GUESSED : GUESS SOME NEW CHARACTER");
             }
             //If the guess is incorrect
             else if (!movieSet.contains(guess)){
-                System.out.println("Wrong guess");
+                System.out.print("WRONG GUESS ------->");
                 incorrectGuessed.add(guess);
             }
             //If the guess is correct
             else{
-                System.out.println("Right guess");
+                System.out.print("RIGHT GUESS -------> ");
                 guessedCorrectly.add(guess);
 
-                System.out.println("The name of the movie after this guess is as");
+                System.out.print("NAME OF THE MOVIE NOW IS ---->>   ");
+
+
+                //THIS WILL RUN ONLY ONCE , FIRST TO GET OUR STRING NAME
                 for (int i=0;i<nameOfMovie.length;i++){
                     for (int j=0;j<nameOfMovie[i].length();j++){
                         if (guessedCorrectly.contains(guess) && nameOfMovie[i].charAt(j)==guess){
                             System.out.print(guess+" ");
-                        }else{
+                        }
+                        else if(guessedCorrectly.contains(nameOfMovie[i].charAt(j))){
+                            System.out.print(nameOfMovie[i].charAt(j)+" ");
+                        }
+                        else{
                             System.out.print("_ ");
                         }
-
                     }
                     System.out.print("        ");
                 }
+                System.out.println();
+                System.out.println();
             }
-
-
         }
+        System.out.println();
+        System.out.println("Yahoo...! You won the game");
 
     }
 }
